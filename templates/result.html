@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Ghostnote – Your Backing Track</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  </head>
+  <body>
+    <div class="card result-card">
+      <div class="header-bar">
+        <h1>Your Backing Track is Ready <span class="emoji">🎉</span></h1>
+        <div class="badges">
+          <span class="badge">Preset: {{ preset }} stems</span>
+          {% if is_multi %}
+            <span class="badge badge-purple">Mode: Multi-remove</span>
+          {% else %}
+            <span class="badge badge-teal">Mode: Single</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <p class="lead">
+        {{ file_name }}
+      </p>
+
+      <div class="player-wrap">
+        <audio controls src="{{ mix_url }}"></audio>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="{{ mix_url }}" download>⬇️ Download Mix</a>
+        <a class="btn btn-outline" href="{{ url_for('index') }}">↩️ Create Another Track</a>
+        <a class="btn btn-secondary" href="{{ url_for('index') }}#tips">Tips</a>
+      </div>
+
+      <div class="meta-grid">
+        {% if is_multi %}
+          <div class="meta">
+            <div class="meta-label">Removed</div>
+            <div class="meta-value">
+              {% if removals and removals|length > 0 %}
+                {% for r in removals %}
+                  <span class="pill">{{ r }}</span>
+                {% endfor %}
+              {% else %}
+                <span class="muted">None</span>
+              {% endif %}
+            </div>
+          </div>
+        {% else %}
+          <div class="meta">
+            <div class="meta-label">Instrument</div>
+            <div class="meta-value"><span class="pill">{{ instrument }}</span></div>
+          </div>
+          <div class="meta">
+            <div class="meta-label">Action</div>
+            <div class="meta-value"><span class="pill">{{ action }}</span></div>
+          </div>
+        {% endif %}
+
+        <div class="meta">
+          <div class="meta-label">Stems Folder</div>
+          <div class="meta-value">
+            <code>static/{{ stems_dir }}</code>
+          </div>
+        </div>
+      </div>
+
+      <details class="advanced">
+        <summary>Advanced details</summary>
+        <ul>
+          <li>Preset selected automatically based on your choices.</li>
+          <li>You can remix again faster—stems are cached for this song + preset.</li>
+          <li>Exported file: <code>{{ mix_url.split('/')[-1] }}</code></li>
+        </ul>
+      </details>
+    </div>
+
+    <footer class="footer">
+      <a href="{{ url_for('index') }}">🏠 Back to Home</a>
+    </footer>
+  </body>
+</html>

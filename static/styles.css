@@ -1,0 +1,245 @@
+/* Reset some defaults */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff, #e6ecff);
+  color: #333;
+  padding: 2rem;
+}
+
+.card {
+  max-width: 720px;
+  margin: auto;
+  background: #fff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  font-size: 2rem;
+  color: #1d4ed8;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.row {
+  margin: 1rem 0;
+}
+
+fieldset {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  background: #f9fafb;
+}
+
+legend {
+  font-weight: bold;
+  color: #374151;
+}
+
+label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+}
+
+input[type="file"],
+select {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  width: 100%;
+  max-width: 300px;
+}
+
+button {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #3b82f6;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #2563eb;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+audio {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+/* ---------- Result page enhancements ---------- */
+
+.header-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.header-bar h1 {
+  font-size: 1.6rem;
+  color: #111827;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header-bar .emoji { font-size: 1.4rem; }
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #e0e7ff;
+}
+
+.badge-teal {
+  background: #ecfeff;
+  color: #0f766e;
+  border-color: #ccfbf1;
+}
+.badge-purple {
+  background: #f5f3ff;
+  color: #6d28d9;
+  border-color: #ddd6fe;
+}
+
+.result-card .lead {
+  color: #4b5563;
+  margin-bottom: 0.75rem;
+}
+
+.player-wrap {
+  margin: 0.5rem 0 1rem;
+}
+.player-wrap audio { width: 100%; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: #fff;
+}
+.btn-primary:hover { background: #2563eb; }
+
+.btn-outline {
+  background: #fff;
+  color: #1f2937;
+  border-color: #d1d5db;
+}
+.btn-outline:hover {
+  background: #f3f4f6;
+}
+
+.btn-secondary {
+  background: #10b981;
+  color: #fff;
+}
+.btn-secondary:hover {
+  background: #059669;
+}
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1rem;
+  margin: 0.5rem 0 1rem;
+}
+@media (max-width: 560px) {
+  .meta-grid { grid-template-columns: 1fr; }
+}
+
+.meta { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 8px; padding: 0.6rem 0.8rem; }
+.meta-label { color: #6b7280; font-size: 0.85rem; margin-bottom: 0.2rem; }
+.meta-value { color: #111827; }
+
+.pill {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #e0e7ff;
+  margin-right: 0.35rem;
+}
+
+.advanced {
+  margin-top: 0.75rem;
+}
+.advanced summary {
+  cursor: pointer;
+  color: #374151;
+  font-weight: 600;
+}
+.advanced ul {
+  margin-top: 0.5rem;
+  padding-left: 1.2rem;
+}
+.advanced li { margin: 0.25rem 0; }
+
+.footer {
+  text-align: center;
+  margin: 1rem auto;
+  color: #6b7280;
+}
+.footer a {
+  color: #2563eb;
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }

@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <title>Ghostnote – Make Your Own Backing Track</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+  <body>
+    <div class="card">
+      <h1>Ghostnote</h1>
+      <p>Upload a song and choose which parts to remove or solo. We’ll mix the rest into a backing track for you.</p>
+
+      <form method="post" action="/process" enctype="multipart/form-data">
+        <!-- Upload -->
+        <div class="row">
+          <input type="file" name="audio_file" accept="audio/*" required />
+        </div>
+
+        <!-- Toggle: remove multiple instruments -->
+        <fieldset class="row">
+          <legend>Mode</legend>
+          <label>
+            <input type="checkbox" id="multi-toggle" name="multi" value="1" />
+            Remove multiple instruments
+          </label>
+          <div class="muted">When enabled, pick one or more instruments to remove. Otherwise, use the single instrument controls below.</div>
+        </fieldset>
+
+        <!-- Multiple removal options -->
+        <fieldset class="row" id="multi-options" style="display:none;">
+          <legend>Remove these instruments</legend>
+          <label><input type="checkbox" name="remove_multi" value="drums" /> Drums</label>
+          <label><input type="checkbox" name="remove_multi" value="bass" /> Bass</label>
+          <label><input type="checkbox" name="remove_multi" value="vocals" /> Vocals</label>
+          <label><input type="checkbox" name="remove_multi" value="piano" /> Piano</label>
+          <label><input type="checkbox" name="remove_multi" value="other" /> Other</label>
+          <div class="muted">Tip: If you only remove Vocals, you can use Fast Karaoke in single mode instead (faster).</div>
+        </fieldset>
+
+        <!-- Single instrument controls -->
+        <div id="single-controls">
+          <!-- Instrument -->
+          <div class="row">
+            <label>
+              Instrument:
+              <select name="instrument" id="instrument" required>
+                <option value="piano">Piano</option>
+                <option value="drums" selected>Drums</option>
+                <option value="bass">Bass</option>
+                <option value="vocals">Vocals</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Action -->
+          <fieldset class="row" id="action-row">
+            <legend>Action</legend>
+            <label><input type="radio" name="action" value="remove" checked /> Remove</label>
+            <label><input type="radio" name="action" value="solo" /> Solo</label>
+          </fieldset>
+
+          <!-- Karaoke Mode (only for Vocals) -->
+          <div class="row" id="karaoke-row" style="display:none;">
+            <label><input type="checkbox" name="karaoke" value="1" /> Fast Karaoke Mode (Vocals vs Backing only)</label>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="row">
+          <button type="submit">Create Backing Track</button>
+        </div>
+      </form>
+      <hr class="row" />
+<section id="tips">
+  <h2>Tips</h2>
+  <ul>
+    <li>For fastest karaoke (vocals only), use “Fast Karaoke Mode”.</li>
+    <li>If you need to remove Piano, we’ll automatically switch to 5 stems.</li>
+    <li>After the first run for a song + preset, remixes are faster (stems are cached).</li>
+  </ul>
+</section>
+
+    </div>
+
+    <script>
+      const multiToggle = document.getElementById('multi-toggle');
+      const multiOptions = document.getElementById('multi-options');
+      const singleControls = document.getElementById('single-controls');
+      const instrumentSelect = document.getElementById('instrument');
+      const karaokeRow = document.getElementById('karaoke-row');
+
+      function updateKaraokeVisibility() {
+        const isVocals = instrumentSelect.value === 'vocals';
+        karaokeRow.style.display = (isVocals && !multiToggle.checked) ? '' : 'none';
+      }
+
+      function updateMode() {
+        const isMulti = multiToggle.checked;
+        multiOptions.style.display = isMulti ? '' : 'none';
+        singleControls.style.display = isMulti ? 'none' : '';
+        updateKaraokeVisibility();
+      }
+
+      instrumentSelect.addEventListener('change', updateKaraokeVisibility);
+      multiToggle.addEventListener('change', updateMode);
+      updateMode();
+    </script>
+  </body>
+</html>
